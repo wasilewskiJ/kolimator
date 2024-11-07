@@ -1,0 +1,122 @@
+{% comment %} <a href="/admin">Konfiguracja</a>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group">{{ field.label }}
+      {{ field }}</div>
+  {% endfor %}
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Calculate</button>
+  </div>
+</form>
+
+{% if plot %}
+  <img src="data:image/png;base64,{{ plot }}" style="max-width: 100%;" />
+{% endif %}
+
+{% if info %}
+  <p>{{ info }}</p>
+{% endif %} {% endcomment %}
+
+{% comment %} <p class="font-bold">Witaj w aplikacji do analizy zdjęć!</p> {% endcomment %}
+
+{% load static %}
+{% load tailwind_tags %}
+<html>
+  <head>
+    <title>Electronic Targeting System</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    {% tailwind_css %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="overflow-hidden w-screen fixed top-0 left-0 m-0 h-screen -z-10">
+        <div id="bg"></div>
+      </div>
+      <div class="w-full">
+        <div class="text-center mt-16">
+          <h1>Electronic Targeting System</h1>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="flex flex-wrap items-center justify-center gap-x-20 gap-y-5">
+          <form method="post" class="half-block">
+            {% csrf_token %}
+
+            {% for field in form %}
+              <div class="form-group mt-1">{{ field.label }}
+                {{ field }}</div>
+            {% endfor %}
+            <div class="form-group mt-1">
+            Crosshair color: <button data-jscolor="{preset:'dark', value:'rgb({{color_r}},{{color_g}},{{color_b}})', palette:'#88ff20 #22ffff #269aff #fff #ff5525 #ffe438 #bb1cd4', hideOnPaletteClick:true, valueElement:'#c-val'}">
+            </div>
+            <input id="c-val" value="rgb({{color_r}},{{color_g}},{{color_b}})" name="color" type="hidden">
+
+            <div class="form-group mt-4">
+              <div class="button">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+                <div class="button-cross1"></div>
+                <div class="button-cross2"></div>
+              </div>
+            </div>
+          </form>
+
+          <div class="text-left flex flex-col justify-center items-center half-block">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-10">
+              <div>
+                <p class="text-2xl text-[--color-primary]">Weapon: {{ weapon }}</p>
+                <p class="text-lg">Sight height: {{ weapon.sight_height }} cm</p>
+                <p class="text-lg">Zero distance: {{ weapon.zero_distance }} m</p>
+                <p class="text-lg">Twist: {{ weapon.twist }} inches</p>
+              </div>
+              <div>
+                <p class="text-2xl mt-4 text-[--color-primary]">Ammo: {{ ammo }}</p>
+                <p class="text-lg">Length: {{ ammo.length }} inches</p>
+                <p class="text-lg">Weight: {{ ammo.weight }} grains</p>
+                <p class="text-lg">Muzzle velocity: {{ ammo.mv }} mps</p>
+                <p class="text-lg">Diameter: {{ ammo.diameter }} inches</p>
+                <p class="text-lg">Ballistic coefficient: {{ ammo.value }}</p>
+                <p class="text-lg">Drag function: {{ ammo.drag_table }}</p>
+              </div>
+            </div>
+
+            <a href="/admin">
+              <div class="button button-small mt-3">
+                <button class="btn btn-primary">Configure weapons and ammo</button>
+                <div class="button-cross1"></div>
+                <div class="button-cross2"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          {% if err %}
+            <p class="text-3xl text-[--color-primary]">Error: {{ err }}</p>
+          {% endif %}
+
+          {% if info %}
+            <p class="text-3xl text-[--color-primary]">Aim {{ info }}</p>
+          {% endif %}
+
+          {% if plot %}
+            <div class="flex justify-center mt-3">
+              <div class="flex flex-col items-start">
+                <p class="ml-6 -mb-8 text-xl">Plot:</p>
+                <img src="data:image/png;base64,{{ plot }}" class="max-w-full rounded-xl w-[500px] plot" />
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="{% static 'bg.js' %}"></script>
+  <script src="{% static 'jscolor.js' %}"></script>
+</html>

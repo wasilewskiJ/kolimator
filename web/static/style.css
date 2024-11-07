@@ -1,0 +1,187 @@
+#bg .bg-block {
+    width: 100px;
+    height: 100px;
+    border: .1px solid #6a6a6a90;
+    position: relative;
+}
+
+#bg .bg-block .bg-dot {
+    background-color: #a9a9a99f;
+    width: 2.5px;
+    height: 2.5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#bg .bg-block .bg-dot-top {
+    background-color: #a9a9a99f;
+    width: 2.5px;
+    height: 2.5px;
+    position: absolute;
+    top: -1.8px;
+    left: 50%;
+}
+
+#bg .bg-block .bg-dot-left {
+    background-color: #a9a9a99f;
+    width: 2.5px;
+    height: 2.5px;
+    position: absolute;
+    top: 50%;
+    left: -1.8px;
+}
+
+#bg .bg-block .bg-corner {
+    background-color: #bbbbbb;
+    width: 6px;
+    height: 1px;
+    left: -3.5px;
+    top: -1px;
+    position: absolute;
+}
+
+#bg .bg-block .bg-corner2 {
+    background-color: #bbbbbb;
+    width: 1px;
+    height: 6px;
+    left: -1px;
+    top: -3.5px;
+    position: absolute;
+}
+
+#bg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: calc(100% + 99px);
+    overflow: hidden;
+    margin-left: -50px;
+
+    background-image: url('bg-desktop.svg');
+}
+
+@font-face {
+    font-family: LetterGothicMTStd-Bold;
+    src: url("Letter Gothic MT Std Bold.otf") format("opentype");
+}
+
+:root {
+    --color-primary: rgb(209, 163, 36);
+    --color-primary-lighter: rgb(225, 180, 33);
+}
+
+html {
+    font-family: LetterGothicMTStd-Bold !important;
+    text-transform: uppercase;
+}
+
+h1 {
+    color: var(--color-primary);
+    font-size: 4rem !important;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 850px) {
+    html {
+        font-size: .6rem;
+    }
+
+    h1 {
+        font-size: 3.5rem !important;
+    }
+
+    .half-block {
+        min-width: 100%;
+    }
+
+}
+
+
+input,
+select {
+    color: black !important;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--color-primary) !important;
+    --tw-ring-color: var(--color-primary) !important;
+}
+
+input {
+    width: 100px;
+}
+
+input[type="checkbox"] {
+    color: var(--color-primary-lighter) !important;
+    outline: none;
+    border: 1px solid rgb(155, 155, 155);
+    background-color: rgba(155, 155, 155, 0.291);
+
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+}
+
+input[type="checkbox"]:hover {
+    background-color: rgba(155, 155, 155, 0.494);
+}
+
+button {
+    color: white;
+    border: 1px solid rgb(155, 155, 155);
+    padding: 15px 60px 12px !important;
+    width: auto;
+    display: inline-block;
+}
+
+.button {
+    color: white;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    background-color: rgba(155, 155, 155, 0.291);
+    transition: background-color 0.15s;
+}
+
+.button-small button {
+    padding: 10px 30px 7px !important;
+    font-size: 1rem;
+}
+
+.button:hover {
+    background-color: rgba(155, 155, 155, 0.494);
+}
+
+.button-cross1 {
+    --size: 15px;
+    background-color: #bbbbbb;
+    width: 1.5px;
+    height: var(--size);
+    right: -1px;
+    top: calc(var(--size) / -2);
+    position: absolute;
+}
+
+.button-cross2 {
+    --size: 15px;
+    background-color: #bbbbbb;
+    width: var(--size);
+    height: 1.5px;
+    right: calc(var(--size) / -2);
+    top: -1px;
+    position: absolute;
+}
+
+.plot {
+    filter: invert(100%);
+}
